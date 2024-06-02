@@ -1,5 +1,5 @@
 <div align="center">
-<h1 align="center">Sample Project for internship course at Off_Chanel</h1>
+<h1 align="center">Sample Project for internship course at Off_Chanel Company</h1>
 </div>
 
 # Guideline
@@ -11,7 +11,7 @@
 
 
 # How to use?
-First we use the LTS version of Django (Django==4.2) to create the project. base on [Django Supported version](https://www.djangoproject.com/download/).First We suggest to creat virtual environment or you can ignore it.
+First we use the LTS version of Django (Django==4.2 in 2024) to create the project base on [Django Supported version](https://www.djangoproject.com/download/). We suggest you to creat [virtual environment](https://docs.python.org/3/library/venv.html) or you can ignore it.
 
 ## Clone the repo
 Clone this repo anywhere you want and move into the directory:
