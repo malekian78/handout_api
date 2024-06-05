@@ -19,11 +19,11 @@ git clone https://github.com/AliBigdeli/Django-HoneyPot-Sample.git
 ```
 
 ## Use Docker
-we use [Docker](https://www.docker.com/) for our project, if you already have docker just simple run the command:
+we use [Docker](https://www.docker.com/) for our project, if you already have docker just go to ```backend``` directory by cmd and simple run the command:
 ```bash
 docker-compose up --build
 ```
-this will be create image and container for you and ...
+this will be create image and container for you and you can go to ```http://127.0.0.1:8000/``` to see the result...
 
 
 
