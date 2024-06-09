@@ -25,8 +25,6 @@ env = environ.Env(
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
-print("_______________________________")
-print(Path(__file__).parent.parent.parent)
 environ.Env.read_env(Path(__file__).parent.parent.parent / ".env")
 
 # Quick-start development settings - unsuitable for production
