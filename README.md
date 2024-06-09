@@ -15,7 +15,7 @@ First we use the LTS version of Django (Django==4.2 in 2024) to create the proje
 ## Clone the repo
 Clone this repo anywhere you want and move into the directory:
 ```bash
-git clone https://github.com/AliBigdeli/Django-HoneyPot-Sample.git
+git clone https://github.com/handout-ir/backend_malekian
 ```
 
 ## Use Docker
