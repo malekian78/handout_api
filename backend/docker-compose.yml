@@ -3,7 +3,7 @@ version: "3.9"
 services:
   backend:
     build: . 
-    container_name: backend
+    container_name: dg_backend
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./core:/app 
@@ -12,3 +12,16 @@ services:
     environment:
       - SECRET_KEY=test
       - DEBUG=True
+    depends_on:
+      - my-postgres
+
+  my-postgres:
+    container_name: pgdb
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mypassword
