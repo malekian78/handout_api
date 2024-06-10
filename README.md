@@ -6,8 +6,7 @@
 - [Guideline](#guideline)
 - [How to use?](#how-to-use)
   - [Clone the repo](#clone-the-repo)
-  - [Create virtual environment](#create-virtual-environment)
-  - [install Requirements and Run](#install-Requirements-and-Run)
+  - [Use Docker](#Use-Docker)
 
 
 # How to use?
@@ -19,18 +18,13 @@ Clone this repo anywhere you want and move into the directory:
 git clone https://github.com/handout-ir/backend_malekian
 ```
 
-## Create virtual environment
-after clone the project you can run this command to create new virtual environment:
+## Use Docker
+we use [Docker](https://www.docker.com/) and [PostgreSql](https://www.postgresql.org/) for our project, if you already have docker and postgreSql installed just go to ```backend``` directory by cmd and simple run the command:
 ```bash
-python -m venv venv
+docker-compose up --build
 ```
+this will be create image and container for you and you can go to ```http://127.0.0.1:8000/``` to see the result...
 
-## install Requirements and Run
-if you use virtual environment first activated then run this command to install all Requirements we also use ```Django4.2``` as LTS version in 2024:
-```bash
-pip install -r requirements.txt
-```
-now run ```python manage.py runsever``` to run the project.
 
 
 
