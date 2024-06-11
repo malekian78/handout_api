@@ -20,6 +20,7 @@ git clone https://github.com/handout-ir/backend_malekian
 
 ## Use Docker
 we use [Docker](https://www.docker.com/) and [PostgreSql](https://www.postgresql.org/) for our project, if you already have docker and postgreSql installed just go to ```backend``` directory by cmd and simple run the command:
+
 ```bash
 docker-compose up --build
 ```
