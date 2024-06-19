@@ -9,9 +9,6 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "updated_at", "created_at")
     list_display_links = ("id", "name")
     list_filter = ("name", "created_at", "updated_at")
-    # list_editable = ( "is_active", "is_staff",)
-    # list_per_page = 20 # default == 100.
-    # readonly_fields = ("is_superuser",)
     search_fields = ("name",)
     ordering = ("created_at",)
 @admin.register(Category)
