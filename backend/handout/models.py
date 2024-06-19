@@ -20,18 +20,19 @@ def validate_file_extension(value):
         raise ValidationError(_('Unsupported file extension.'))
 
 class Handout(BaseModel):
-    name = models.CharField(verbose_name=_("نام جزوه"), max_length=100)
-    slug = models.SlugField(verbose_name=_("لینک دسترسی"), unique=True, auto_created=True, help_text="کاربران از طریق این لینک به صفحه جزوه دسترسی پیدا خواهند کرد")
-    description = models.TextField(verbose_name=_("توضیحات"),max_length=500)
-    file_name = models.CharField(verbose_name=_("نام فایل"), max_length=150, editable=False)
-    page_count = models.PositiveIntegerField(verbose_name=_("تعداد صفحات جزوه"))
-    file_size = models.PositiveIntegerField(verbose_name=_("اندازه فایل"), editable=False)
-    visit_count = models.PositiveIntegerField(verbose_name=_("تعداد بازدید"), default=0)
-    publish_time = models.DateField(verbose_name=_("تاریخ انتشار"))
-    author = models.ForeignKey("Author", verbose_name=_("نویسنده"), on_delete=models.DO_NOTHING, null=True, blank=True)
-    file = models.FileField(verbose_name=_("آپلود فایل"), upload_to='uploads/{}/{}'.format(author, file_name), validators=[validate_file_extension])
-    category = models.ManyToManyField("Category", verbose_name=_("دسته بندی"), blank=True)
-    tag = models.ManyToManyField("Tag", verbose_name=_("تگ"), blank=True)
+    name = models.CharField(verbose_name=_("Handout name"), max_length=100)
+    slug = models.SlugField(verbose_name=_("access"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه جزوه دسترسی پیدا خواهند کرد"))
+    description = models.TextField(verbose_name=_("description"),max_length=500)
+    page_count = models.PositiveIntegerField(verbose_name=_("page count"))
+    visit_count = models.PositiveIntegerField(verbose_name=_("View count"), default=0)
+    publish_time = models.DateField(verbose_name=_("publish date"))
+    author = models.ForeignKey("Author", verbose_name=_("author"), on_delete=models.DO_NOTHING, null=True, blank=True)
+    file_size = models.PositiveIntegerField(verbose_name=_("file size"), editable=False)
+    file_name = models.CharField(verbose_name=_("file name"), max_length=150, editable=False)
+    # file = models.FileField(verbose_name=_("file to upload"), upload_to='uploads/{}/{}'.format(author, file_name), validators=[validate_file_extension])
+    file = models.FileField(verbose_name=_("file to upload"), upload_to='uploads/testAuthor/', validators=[validate_file_extension])
+    category = models.ManyToManyField("Category", verbose_name=_("category"), blank=True)
+    tag = models.ManyToManyField("Tag", verbose_name=_("tag"), blank=True)
     def __str__(self):
         return self.name
     class Meta:
@@ -53,8 +54,8 @@ class Handout(BaseModel):
 
 
 class Category(BaseModel):
-    name = models.CharField(verbose_name=_("نام دسته بندی"), max_length=150)
-    slug = models.SlugField(verbose_name=_("لینک دسترسی"), unique=True, auto_created=True, help_text="کاربران از طریق این لینک به صفحه دسته بندی مورد نظر دسترسی پیدا خواهند کرد")
+    name = models.CharField(verbose_name=_("category name"), max_length=150)
+    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه دسته بندی مورد نظر دسترسی پیدا خواهند کرد"))
     parent = models.ForeignKey(
         'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE
     )
@@ -72,8 +73,8 @@ class Category(BaseModel):
 
 
 class Tag(BaseModel):
-    name = models.CharField(verbose_name=_("نام تگ"), max_length=150)
-    slug = models.SlugField(verbose_name=_("لینک دسترسی"), unique=True, auto_created=True, help_text="کاربران از طریق این لینک به صفحه تگ مورد نظر دسترسی پیدا خواهند کرد")
+    name = models.CharField(verbose_name=_("tag name"), max_length=150)
+    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه تگ مورد نظر دسترسی پیدا خواهند کرد"))
     # handout = models.ManyToManyField(Handout, verbose_name=_("جزوه مربوطه", on_delete=models.DO_NOTHING, null=True, blank=True )
     def __str__(self):
         return self.name
@@ -81,7 +82,7 @@ class Tag(BaseModel):
         verbose_name_plural = _("Tag")
 
 class Author(BaseModel):
-    name = models.CharField(verbose_name=_("نام نویسنده"), max_length=150)
+    name = models.CharField(verbose_name=_("author name"), max_length=150)
     
     def __str__(self):
         return self.name
