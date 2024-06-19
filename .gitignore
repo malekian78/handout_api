@@ -4,3 +4,6 @@ db.sqlite3
 # Environments
 .env
 venv/
+
+# media files
+/backend/media/
