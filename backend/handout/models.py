@@ -59,6 +59,11 @@ class Tag(BaseModel):
 
 class Author(BaseModel):
     name = models.CharField(verbose_name=_("نام نویسنده"), max_length=150)
+    
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name_plural = _("Author")
 
 #? ManyToMany relationship
 # class HandoutTags(BaseModel):
