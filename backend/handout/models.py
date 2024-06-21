@@ -21,7 +21,7 @@ def validate_file_extension(value):
 
 class Handout(BaseModel):
     name = models.CharField(verbose_name=_("Handout name"), max_length=100)
-    slug = models.SlugField(verbose_name=_("access"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه جزوه دسترسی پیدا خواهند کرد"))
+    slug = models.SlugField(verbose_name=_("access"), unique=True, auto_created=True, help_text=_("by this link users will access to this Handout."))
     description = models.TextField(verbose_name=_("description"),max_length=500)
     page_count = models.PositiveIntegerField(verbose_name=_("page count"))
     visit_count = models.PositiveIntegerField(verbose_name=_("View count"), default=0)
@@ -55,7 +55,7 @@ class Handout(BaseModel):
 
 class Category(BaseModel):
     name = models.CharField(verbose_name=_("category name"), max_length=150)
-    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه دسته بندی مورد نظر دسترسی پیدا خواهند کرد"))
+    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("by this link users will access to this category page."))
     parent = models.ForeignKey(
         'self', null=True, blank=True, related_name='children', on_delete=models.CASCADE
     )
@@ -74,7 +74,7 @@ class Category(BaseModel):
 
 class Tag(BaseModel):
     name = models.CharField(verbose_name=_("tag name"), max_length=150)
-    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("کاربران از طریق این لینک به صفحه تگ مورد نظر دسترسی پیدا خواهند کرد"))
+    slug = models.SlugField(verbose_name=_("access link"), unique=True, auto_created=True, help_text=_("by this link users will access to this Tag page."))
     # handout = models.ManyToManyField(Handout, verbose_name=_("جزوه مربوطه", on_delete=models.DO_NOTHING, null=True, blank=True )
     def __str__(self):
         return self.name

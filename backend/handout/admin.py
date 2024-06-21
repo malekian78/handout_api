@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Author, Category, Handout, Tag
+from django.utils.translation import gettext_lazy as _
 # Register your models here.
 
 @admin.register(Author)
@@ -20,6 +21,14 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ("name", "parent", "created_at", "updated_at")
     search_fields = ("name",)
     ordering = ("created_at",)
+    prepopulated_fields = {'slug':('name',)}
+    fieldsets = (
+        (_('Category Fields'), {
+            'fields': (
+                "name", "parent", "slug"
+            ),
+        }),
+    )
 
 @admin.register(Handout)
 class HandoutAdmin(admin.ModelAdmin):
@@ -43,4 +52,5 @@ class TagrAdmin(admin.ModelAdmin):
     list_filter = ("name", "created_at", "updated_at")
     search_fields = ("name",)
     ordering = ("created_at",)
+    prepopulated_fields = {'slug':('name',)}
 
