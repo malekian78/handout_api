@@ -4,9 +4,9 @@ from ..models.custom_user import User
 from django.utils.translation import gettext_lazy as _
 # Register your models here.
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     # setting filds of what to showing in admin-dashboard
-    model = User
     list_display = ("id", "email", "is_superuser", "is_active", "is_staff", "created_date")
     list_display_links = ("id", "email")
     list_filter = ("email", "is_superuser", "is_active", "is_staff", "created_date")
@@ -37,5 +37,3 @@ class CustomUserAdmin(UserAdmin):
             )}
         ),
     )
-
-admin.site.register(User, CustomUserAdmin)
