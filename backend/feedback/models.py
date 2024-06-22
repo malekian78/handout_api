@@ -36,7 +36,7 @@ class Like(BaseModel):
     def save(self, *args, **kwargs):
         # prevent a category to be itself parent
         if self.client_ip is None and self.user is None:
-            self.unique_error_message("test")
+            # self.unique_error_message("test")
             return
             # raise ValueError(_("client_ip and user could not be null for both"))
         super().save(*args, **kwargs)
