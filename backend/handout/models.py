@@ -19,6 +19,8 @@ def validate_file_extension(value):
     if not ext.lower() in valid_extensions:
         raise ValidationError(_('Unsupported file extension.'))
 
+def get_upload_path(instance, filename):
+    return 'documents/{0}/{1}'.format(instance.author.name, filename)
 class Handout(BaseModel):
     name = models.CharField(verbose_name=_("Handout name"), max_length=100)
     slug = models.SlugField(verbose_name=_("access"), unique=True, auto_created=True, help_text=_("by this link users will access to this Handout."))
@@ -29,8 +31,7 @@ class Handout(BaseModel):
     author = models.ForeignKey("Author", verbose_name=_("author"), on_delete=models.DO_NOTHING, null=True, blank=True)
     file_size = models.PositiveIntegerField(verbose_name=_("file size"), editable=False)
     file_name = models.CharField(verbose_name=_("file name"), max_length=150, editable=False)
-    # file = models.FileField(verbose_name=_("file to upload"), upload_to='uploads/{}/{}'.format(author, file_name), validators=[validate_file_extension])
-    file = models.FileField(verbose_name=_("file to upload"), upload_to='uploads/testAuthor/', validators=[validate_file_extension])
+    file = models.FileField(verbose_name=_("file to upload"), upload_to=get_upload_path , validators=[validate_file_extension])
     category = models.ManyToManyField("Category", verbose_name=_("category"), blank=True)
     tag = models.ManyToManyField("Tag", verbose_name=_("tag"), blank=True)
     def __str__(self):
@@ -50,6 +51,7 @@ class Handout(BaseModel):
         name, ext = os.path.splitext(original_filename)
         new_name = f"{self.name}_{datetime.now().strftime('%Y%m%d%H%M%S')}{ext}"
         return new_name
+    
     
 
 
