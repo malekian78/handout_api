@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 class UsersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "users"
-    
-    class Meta:
-        verbose_name = _("User Config")
-        verbose_name_plural = _("User Configs")
+    verbose_name = _("User Config")
+    verbose_name_plural = _("User Configs")
+
