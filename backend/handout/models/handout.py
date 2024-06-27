@@ -4,7 +4,7 @@ from utils.base_model import BaseModel
 from django.core.validators import FileExtensionValidator 
 
 def get_upload_path(instance, filename):
-    return 'handouts/{0}/{1}'.format(instance.author.name, filename)
+    return f'handouts/{instance.author.name}/{filename}'
 
 class Handout(BaseModel):
     name = models.CharField(verbose_name=_("Handout name"), max_length=100)
