@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from utils.base_model import BaseModel
 from django.core.validators import FileExtensionValidator 
+import os
 
 def get_upload_path(instance, filename):
     return f'handouts/{instance.author.name}/{filename}'
@@ -29,5 +30,6 @@ class Handout(BaseModel):
     def save(self, *args, **kwargs):
         if self.file:
             self.file_size = self.file.size
+            self.file_name = os.path.basename(self.file.name)
         super().save(*args, **kwargs)    
     
