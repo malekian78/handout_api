@@ -16,7 +16,7 @@ class Handout(BaseModel):
     publish_time = models.DateField(verbose_name=_("publish date"))
     author = models.ForeignKey("Author", verbose_name=_("author"), on_delete=models.CASCADE, related_name="handout")
     file_size = models.PositiveIntegerField(verbose_name=_("file size"), editable=False)
-    file_name = models.CharField(verbose_name=_("file name"), max_length=150)
+    file_name = models.CharField(verbose_name=_("file name"), max_length=150, blank=True)
     file = models.FileField(verbose_name=_("file to upload"), upload_to=get_upload_path, validators=[FileExtensionValidator(['pdf'])])
     category = models.ManyToManyField("Category", verbose_name=_("category"))
     tag = models.ManyToManyField("Tag", verbose_name=_("tag"), blank=True)
@@ -30,6 +30,7 @@ class Handout(BaseModel):
     def save(self, *args, **kwargs):
         if self.file:
             self.file_size = self.file.size
-            self.file_name = os.path.basename(self.file.name)
+            if not self.file_name:
+                self.file_name = os.path.basename(self.file.name)
         super().save(*args, **kwargs)    
     
