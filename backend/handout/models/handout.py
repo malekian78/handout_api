@@ -25,5 +25,9 @@ class Handout(BaseModel):
     
     def __str__(self):
         return self.name    
-        
+    
+    def save(self, *args, **kwargs):
+        if self.file:
+            self.file_size = self.file.size
+        super().save(*args, **kwargs)    
     
