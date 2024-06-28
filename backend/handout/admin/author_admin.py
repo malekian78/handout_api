@@ -2,6 +2,7 @@ from django.contrib import admin
 from handout.models import Author
 from django.utils.translation import gettext_lazy as _
 
+
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "updated_at", "created_at")

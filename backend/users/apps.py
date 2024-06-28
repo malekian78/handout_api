@@ -7,4 +7,3 @@ class UsersConfig(AppConfig):
     name = "users"
     verbose_name = _("User Config")
     verbose_name_plural = _("User Configs")
-
