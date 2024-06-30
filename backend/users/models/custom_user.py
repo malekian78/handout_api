@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager
+from django_jalali.db import models as jmodels
 
 
 class MyUserManager(BaseUserManager):
@@ -34,15 +35,12 @@ class MyUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(verbose_name=_("email"), max_length=255, unique=True)
-    is_superuser = models.BooleanField(verbose_name=_("is superuser?"), default=False)
-    is_staff = models.BooleanField(verbose_name=_("is staff?"), default=False)
-    is_active = models.BooleanField(verbose_name=_("is active?"), default=False)
-    created_date = models.DateTimeField(
-        verbose_name=_("created date"), auto_now_add=True
-    )
-    updated_date = models.DateTimeField(verbose_name=_("updated date"), auto_now=True)
-
+    email = models.EmailField( verbose_name= _("email"), max_length=255, unique=True)
+    is_superuser = models.BooleanField(verbose_name= _("is superuser?"), default=False)
+    is_staff = models.BooleanField(verbose_name= _("is staff?"), default=False)
+    is_active = models.BooleanField(verbose_name= _("is active?"), default=False)
+    created_date = jmodels.jDateTimeField(verbose_name= _("created date"), auto_now_add=True)
+    updated_date = jmodels.jDateTimeField(verbose_name= _("updated date"), auto_now=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = MyUserManager()
