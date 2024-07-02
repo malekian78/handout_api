@@ -25,8 +25,3 @@ we use [Docker](https://www.docker.com/) ,[PostgreSql](https://www.postgresql.or
 docker-compose up --build
 ```
 this will be create image and container for you and you can go to ```http://127.0.0.1:8000/``` to see the result...
-
-
-
-
-

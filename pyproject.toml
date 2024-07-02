@@ -1,0 +1,17 @@
+[tool.ruff]
+# Specify which rules to enable. Common ones include:
+# E - Pycodestyle errors
+# F - Pyflakes errors
+# W - Pycodestyle warnings
+# C90 - McCabe complexity plugin
+# D - Docstring conventions (like pydocstyle)
+select = ["E", "F", "W", "C90", "D"]
+
+# Exclude specific files or directories (e.g., migrations, static files)
+exclude = ["migrations", "static", "venv", "env"]
+
+# Set the maximum line length (if not ignoring E501)
+line-length = 120
+
+# Enable or disable fixable linting issues automatically
+fix = false

@@ -6,23 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('handout', '0004_alter_author_created_at_alter_author_name_and_more'),
+        ("handout", "0004_alter_author_created_at_alter_author_name_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='slug',
-            field=models.SlugField(auto_created=True, help_text='by this link users will access to this category page.', unique=True, verbose_name='access link'),
+            model_name="category",
+            name="slug",
+            field=models.SlugField(
+                auto_created=True,
+                help_text="by this link users will access to this category page.",
+                unique=True,
+                verbose_name="access link",
+            ),
         ),
         migrations.AlterField(
-            model_name='handout',
-            name='slug',
-            field=models.SlugField(auto_created=True, help_text='by this link users will access to this Handout.', unique=True, verbose_name='access'),
+            model_name="handout",
+            name="slug",
+            field=models.SlugField(
+                auto_created=True,
+                help_text="by this link users will access to this Handout.",
+                unique=True,
+                verbose_name="access",
+            ),
         ),
         migrations.AlterField(
-            model_name='tag',
-            name='slug',
-            field=models.SlugField(auto_created=True, help_text='by this link users will access to this Tag page.', unique=True, verbose_name='access link'),
+            model_name="tag",
+            name="slug",
+            field=models.SlugField(
+                auto_created=True,
+                help_text="by this link users will access to this Tag page.",
+                unique=True,
+                verbose_name="access link",
+            ),
         ),
     ]
