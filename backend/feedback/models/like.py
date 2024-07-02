@@ -27,6 +27,10 @@ class Like(BaseModel):
     class Meta:
         verbose_name = _("Like")
         verbose_name_plural = _("Likes")
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'handout'], name='unique_user_handout_like')
+        ]
+    
 
     def __str__(self):
         return f"{self.handout}_{self.user}"
