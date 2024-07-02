@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # Modules
     'django_jalali',
     
+    # restFramework
+    'rest_framework',
+    
     # My Apps
     "users",
     "handout",
