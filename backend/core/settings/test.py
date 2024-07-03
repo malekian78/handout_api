@@ -1,8 +1,8 @@
-from .base import *
+from core.settings.base import *
 
 DEBUG = config("DEBUG", cast=bool, default=True)
 
-# Add test-specific settings
+# For test we should use sqlite3
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

@@ -1,7 +1,6 @@
-import os
-from django.core.exceptions import ImproperlyConfigured
+from decouple import config
 
-ENVIRONMENT = os.getenv('DJANGO_ENV', 'local')
+ENVIRONMENT = config('DJANGO_ENV', default='production')
 
 if ENVIRONMENT == 'production':
     from .production import *
