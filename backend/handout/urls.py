@@ -1,11 +1,9 @@
 from django.urls import path
-from handout.views import CategoryListCreateAPIView
+from handout.views import CategoryListCreateAPIView, CategoryDetailApiView
 
 urlpatterns = [
-    # For APIView
-    # path('categories/', CategoryListAPIView.as_view(), name='category-list'),
-    
-    # For Generic Views
-    path('categories/', CategoryListCreateAPIView.as_view(), name='category-list-create'),
-    
+    # Generic Views for Detail of Category
+    path('categories/<slug:slug>/', CategoryDetailApiView.as_view(), name='category-detail'),
+    # Generic Views for list of Category
+    path('categories/', CategoryListCreateAPIView.as_view(), name='category-list')
 ]
