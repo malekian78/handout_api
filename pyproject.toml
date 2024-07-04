@@ -5,7 +5,7 @@
 # W - Pycodestyle warnings
 # C90 - McCabe complexity plugin
 # D - Docstring conventions (like pydocstyle)
-select = ["E", "F", "W", "C90", "D"]
+select = ["E", "F", "W", "C90", "D", "I"]
 
 # Exclude specific files or directories (e.g., migrations, static files)
 exclude = ["migrations", "static", "venv", "env"]
@@ -13,5 +13,14 @@ exclude = ["migrations", "static", "venv", "env"]
 # Set the maximum line length (if not ignoring E501)
 line-length = 120
 
+src = ["backend"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
 # Enable or disable fixable linting issues automatically
-fix = false
+fix = true
+
+[tool.black]
+line-length = 120
+extend-exclude = '''
