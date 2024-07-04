@@ -1,1 +1,1 @@
-from .category import CategoryListCreateAPIView, CategoryDetailApiView
+from .category import CategoryViewSet

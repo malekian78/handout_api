@@ -1,11 +1,12 @@
-from django.urls import path
-from handout.views import CategoryListCreateAPIView, CategoryDetailApiView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from handout.views import CategoryViewSet
 
 app_name = "handout"
 
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+
 urlpatterns = [
-    # Generic Views for Detail of Category
-    path('categories/<slug:slug>/', CategoryDetailApiView.as_view(), name='category-detail'),
-    # Generic Views for list of Category
-    path('categories/', CategoryListCreateAPIView.as_view(), name='category-list')
+    path('', include(router.urls)),
 ]
