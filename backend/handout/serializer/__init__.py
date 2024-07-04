@@ -1,1 +1,1 @@
-from .categorySerializer import CategorySerializer, DetailCategorySerializer
+from .category import CategorySerializer, DetailCategorySerializer
