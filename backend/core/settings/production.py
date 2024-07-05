@@ -1,4 +1,4 @@
-from core.settings.base import *
+from .base import *
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 
