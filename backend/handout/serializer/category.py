@@ -10,6 +10,4 @@ class CategorySerializer(serializers.ModelSerializer):
     children = CategoryDetailSerializer(many=True, read_only=True)
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'parent', 'children']
-        depth = 1 
-        
+        fields = ['id', 'name', 'slug', 'parent', 'children'] 
