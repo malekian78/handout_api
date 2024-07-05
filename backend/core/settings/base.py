@@ -1,12 +1,15 @@
 from pathlib import Path
-from decouple import config
+from decouple import config, Csv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY", default="test")
 
-ALLOWED_HOSTS = []
+DEBUG = config("DEBUG", cast=bool, default=False)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='0.0.0.0', cast=Csv())
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",

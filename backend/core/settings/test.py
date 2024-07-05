@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = config("DEBUG", cast=bool, default=True)
+DEBUG = False
 
 # For test we should use sqlite3
 DATABASES = {
