@@ -5,7 +5,7 @@ from handout.views import CategoryViewSet
 app_name = "handout"
 
 router = DefaultRouter()
-router.register(r'categories', CategoryViewSet)
+router.register(r'categories', CategoryViewSet, basename="category")
 
 urlpatterns = [
     path('', include(router.urls)),

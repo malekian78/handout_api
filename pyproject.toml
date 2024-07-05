@@ -37,3 +37,6 @@ python_files = [
     "test_*.py",
     "*_test.py"
 ]
+
+[tool.pytest.ini_options]
+django_settings_module = "core.settings.test"
