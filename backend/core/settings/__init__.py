@@ -1,10 +1,9 @@
+import os
 from decouple import config
 
-ENVIRONMENT = config('DJANGO_ENV', default='production')
+settings_module = config('DJANGO_SETTINGS_MODULE', default="core.settings.test")
 
-if ENVIRONMENT == 'production':
-    from .production import *
-elif ENVIRONMENT == 'test':
-    from .test import *
-else:
-    from .local import *
+if not settings_module:
+    raise ValueError("The DJANGO_SETTINGS_MODULE environment variable is not set")
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
