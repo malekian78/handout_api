@@ -24,3 +24,16 @@ fix = true
 [tool.black]
 line-length = 120
 extend-exclude = '''
+
+[tool.pytest.ini_options]
+# Example pytest configuration options
+addopts = "--maxfail=3 --disable-warnings"
+testpaths = [
+    "tests",
+    "integration_tests"
+]
+minversion = "6.0"
+python_files = [
+    "test_*.py",
+    "*_test.py"
+]
