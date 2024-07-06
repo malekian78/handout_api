@@ -21,9 +21,6 @@ combine-as-imports = true
 # Enable or disable fixable linting issues automatically
 fix = true
 
-[tool.black]
-line-length = 120
-extend-exclude = '''
 
 [tool.pytest.ini_options]
 # Example pytest configuration options
@@ -38,5 +35,4 @@ python_files = [
     "*_test.py"
 ]
 
-[tool.pytest.ini_options]
 django_settings_module = "core.settings.test"
