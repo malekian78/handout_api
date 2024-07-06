@@ -20,7 +20,3 @@ combine-as-imports = true
 
 # Enable or disable fixable linting issues automatically
 fix = true
-
-[tool.black]
-line-length = 120
-extend-exclude = '''
