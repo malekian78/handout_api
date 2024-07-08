@@ -10,6 +10,8 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='0.0.0.0', cast=Csv())
 
+settings_module = config('DJANGO_SETTINGS_MODULE', default="core.settings.test")
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
