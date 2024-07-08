@@ -18,13 +18,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+
     # Modules
     'django_jalali',
-    
+
     # restFramework
     'rest_framework',
-    
+
     # My Apps
     "users",
     "handout",

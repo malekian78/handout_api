@@ -30,7 +30,7 @@ class Like(BaseModel):
         constraints = [
             models.UniqueConstraint(fields=['user', 'handout'], name='unique_user_handout_like')
         ]
-    
+
 
     def __str__(self):
         return f"{self.handout}_{self.user}"

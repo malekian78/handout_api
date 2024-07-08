@@ -45,7 +45,7 @@ class TestLike:
             handout = handout,
             )
         assert Like.objects.filter(user=user, handout=handout).exists()
-    
+
     def test_duplicate_like(self, handout, user):
         Like.objects.create(
             client_ip="127.22.22.110",

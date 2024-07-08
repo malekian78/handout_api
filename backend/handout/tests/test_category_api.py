@@ -17,7 +17,7 @@ def category():
 
 @pytest.mark.django_db
 class TestCategoryApi:
-    
+
     def test_get_category_response_200_status(self, api_client):
         url = reverse('handout:category-list')
         response = api_client.get(url)

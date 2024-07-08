@@ -39,14 +39,13 @@ class Handout(BaseModel):
         verbose_name_plural = _("Handouts")
 
     def __str__(self):
-        return self.name    
-    
+        return self.name
+
     def save(self, *args, **kwargs):
         self.file_size = self.file.size
         if not self.file_name:
             file_name = os.path.basename(self.file.name)
             file_name = file_name[:file_name.rfind('.')]
             self.file_name = file_name
-        super().save(*args, **kwargs)    
-    
+        super().save(*args, **kwargs)
 

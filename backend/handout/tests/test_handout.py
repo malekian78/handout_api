@@ -41,7 +41,7 @@ class TestHandout:
     def test_handout_file_name_change(self, handout):
         handout.file_name = "test_file"
         assert handout.file_name == "test_file"
-    
+
     def test_handout_file_size(self, handout):
         assert handout.file_size == handout.file.size
-    
+
