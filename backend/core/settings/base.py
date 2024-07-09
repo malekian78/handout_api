@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     
     # restFramework
     'rest_framework',
+    'drf_yasg', # API Document
     
     # My Apps
     "users",
