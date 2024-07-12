@@ -4,13 +4,15 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from handout.models import Handout, Author, Category, Tag
 from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
 @pytest.fixture
 def author():
     return Author.objects.create(name="Author_Test")
 
 @pytest.fixture
 def user():
-    return get_user_model().objects.create_user(
+    return User.objects.create_user(
             email='testuserr@example.com', password='testpass'
         )
 
