@@ -120,7 +120,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Handout API',
-    'DESCRIPTION': 'Your project description',
+    'DESCRIPTION': 'sharing handout for students',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
