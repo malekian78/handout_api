@@ -3,7 +3,7 @@ from feedback.models import Like
 from django.db.utils import IntegrityError
 
 @pytest.mark.django_db
-def test_user_can_like_handout(handout, user):
+def test_user_can_like_handout(handout, user, teardown_handouts):
     Like.objects.create(
         client_ip="127.22.22.110",
         user = user,

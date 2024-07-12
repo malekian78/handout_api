@@ -48,8 +48,12 @@ def category():
 @pytest.fixture
 def teardown_handouts():
     """ Fixture to teardown any state that was created by test """
+    print("\n ________________________ ")
+    print("i work")
     yield  # This will run the test
     # Teardown logic
+    print("\n ________________________ ")
+    print("i work")
     handouts = Handout.objects.all()
     for handout in handouts:
         if handout.file:
