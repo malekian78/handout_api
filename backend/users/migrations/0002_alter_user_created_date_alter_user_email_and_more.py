@@ -6,38 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='created_date',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='created date'),
+            model_name="user",
+            name="created_date",
+            field=models.DateTimeField(auto_now_add=True, verbose_name="created date"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(max_length=255, unique=True, verbose_name='email'),
+            model_name="user",
+            name="email",
+            field=models.EmailField(max_length=255, unique=True, verbose_name="email"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_active',
-            field=models.BooleanField(default=False, verbose_name='is active?'),
+            model_name="user",
+            name="is_active",
+            field=models.BooleanField(default=False, verbose_name="is active?"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_staff',
-            field=models.BooleanField(default=False, verbose_name='is staff?'),
+            model_name="user",
+            name="is_staff",
+            field=models.BooleanField(default=False, verbose_name="is staff?"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='is_superuser',
-            field=models.BooleanField(default=False, verbose_name='is superuser?'),
+            model_name="user",
+            name="is_superuser",
+            field=models.BooleanField(default=False, verbose_name="is superuser?"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='updated_date',
-            field=models.DateTimeField(auto_now=True, verbose_name='updated date'),
+            model_name="user",
+            name="updated_date",
+            field=models.DateTimeField(auto_now=True, verbose_name="updated date"),
         ),
     ]
