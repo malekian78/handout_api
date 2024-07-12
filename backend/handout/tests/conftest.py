@@ -1,13 +1,7 @@
 import pytest
-from rest_framework.test import APIClient
 from django.utils import timezone
 from handout.models import Category, Handout, Author, Tag
 from django.core.files.uploadedfile import SimpleUploadedFile
-
-@pytest.fixture
-def api_client():
-    client = APIClient()
-    return client
 
 @pytest.fixture
 def category():
