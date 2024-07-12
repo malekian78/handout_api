@@ -1,19 +1,5 @@
 import pytest
-from rest_framework.test import APIClient
 from django.urls import reverse
-from handout.models import Category
-
-@pytest.fixture
-def api_client():
-    client = APIClient()
-    return client
-
-@pytest.fixture
-def category():
-    return Category.objects.create(
-        name="cat1",
-        slug="cat1",
-        )
 
 @pytest.mark.django_db
 class TestCategoryApi:
