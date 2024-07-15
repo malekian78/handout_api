@@ -24,7 +24,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/handout/", include("handout.urls")),
+    path("api/", include("handout.urls")),
 ]
 
 if settings.DEBUG:
