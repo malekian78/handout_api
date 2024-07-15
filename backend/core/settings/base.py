@@ -1,6 +1,6 @@
 from pathlib import Path
-from decouple import config, Csv
 
+from decouple import Csv, config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,9 +8,9 @@ SECRET_KEY = config("SECRET_KEY", default="test")
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='0.0.0.0', cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="0.0.0.0", cast=Csv())
 
-settings_module = config('DJANGO_SETTINGS_MODULE', default="core.settings.test")
+settings_module = config("DJANGO_SETTINGS_MODULE", default="core.settings.test")
 
 
 INSTALLED_APPS = [
@@ -20,13 +20,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # Modules
-    'django_jalali',
-
+    "django_jalali",
     # restFramework
-    'rest_framework',
-
+    "rest_framework",
     # My Apps
     "users",
     "handout",

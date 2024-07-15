@@ -1,6 +1,6 @@
 from django.contrib import admin
+
 from handout.models import Handout
-from django.utils.translation import gettext_lazy as _
 
 
 @admin.register(Handout)
