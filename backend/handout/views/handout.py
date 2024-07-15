@@ -4,6 +4,6 @@ from handout.models import Handout
 from handout.serializer import HandoutSerializer
 
 
-class HandoutViewSet(viewsets.ModelViewSet):
+class HandoutViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Handout.objects.all()
     serializer_class = HandoutSerializer
