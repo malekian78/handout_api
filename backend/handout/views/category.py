@@ -1,12 +1,13 @@
 from rest_framework import viewsets
+
 from handout.models import Category
 from handout.serializer import CategorySerializer
 from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample
 
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    
+    serializer_class = CategorySerialize
     @extend_schema(
         operation_id='DetailCategory',
         tags=['Category'],

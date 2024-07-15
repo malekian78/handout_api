@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from utils.base_model import BaseModel
 
 
@@ -10,9 +11,7 @@ class Category(BaseModel):
         unique=True,
         help_text=_("by this link users will access to this category page."),
     )
-    parent = models.ForeignKey(
-        "self", null=True, blank=True, related_name="children", on_delete=models.CASCADE
-    )
+    parent = models.ForeignKey("self", null=True, blank=True, related_name="children", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Category")

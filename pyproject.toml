@@ -4,23 +4,22 @@
 # F - Pyflakes errors
 # W - Pycodestyle warnings
 # C90 - McCabe complexity plugin
-# D - Docstring conventions (like pydocstyle)
-select = ["E", "F", "W", "C90", "D", "I"]
+select = ["E", "F", "W", "C90", "I"]
 
 # Exclude specific files or directories (e.g., migrations, static files)
-exclude = ["migrations", "static", "venv", "env"]
+exclude = ["migrations", "static", "venv", "env", "settings", "__init__.py"]
 
 # Set the maximum line length (if not ignoring E501)
 line-length = 120
 
 src = ["backend"]
 
-[tool.ruff.lint.isort]
-combine-as-imports = true
-
 # Enable or disable fixable linting issues automatically
 fix = true
 
-[tool.black]
-line-length = 120
-extend-exclude = '''
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+django_settings_module = "core.settings.test"

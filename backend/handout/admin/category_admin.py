@@ -1,6 +1,7 @@
 from django.contrib import admin
-from handout.models import Category
 from django.utils.translation import gettext_lazy as _
+
+from handout.models import Category
 
 
 @admin.register(Category)

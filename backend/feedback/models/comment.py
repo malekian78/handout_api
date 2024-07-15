@@ -1,7 +1,8 @@
-from handout.models import Handout
-from utils.base_model import BaseModel
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from handout.models import Handout
+from utils.base_model import BaseModel
 
 
 class Comment(BaseModel):
@@ -20,9 +21,7 @@ class Comment(BaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=150)
     email = models.EmailField(verbose_name=_("email"), max_length=150)
     body = models.TextField(verbose_name=_("Message"))
-    status = models.PositiveSmallIntegerField(
-        choices=Status.choices, verbose_name=_("status"), default=0
-    )
+    status = models.PositiveSmallIntegerField(choices=Status.choices, verbose_name=_("status"), default=0)
 
     class Meta:
         verbose_name = _("Comment")

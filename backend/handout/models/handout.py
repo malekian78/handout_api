@@ -1,9 +1,11 @@
 import os
+
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from utils.base_model import BaseModel
-from django.core.validators import FileExtensionValidator
 from django_jalali.db import models as jmodels
+
+from utils.base_model import BaseModel
 
 
 def get_upload_path(instance, filename):
@@ -28,8 +30,15 @@ class Handout(BaseModel):
         related_name="handout",
     )
     file_size = models.PositiveIntegerField(verbose_name=_("file size"), editable=False)
-    file_name = models.CharField(verbose_name=_("file name"), max_length=150, blank=True, help_text=_("if you leave it blank the file name of uploaded file will be replaced."))
-    file = models.FileField(verbose_name=_("file to upload"), upload_to=get_upload_path, validators=[FileExtensionValidator(['pdf'])])
+    file_name = models.CharField(
+        verbose_name=_("file name"),
+        max_length=150,
+        blank=True,
+        help_text=_("if you leave it blank the file name of uploaded file will be replaced."),
+    )
+    file = models.FileField(
+        verbose_name=_("file to upload"), upload_to=get_upload_path, validators=[FileExtensionValidator(["pdf"])]
+    )
 
     category = models.ManyToManyField("Category", verbose_name=_("category"))
     tag = models.ManyToManyField("Tag", verbose_name=_("tag"), blank=True)
@@ -39,14 +48,12 @@ class Handout(BaseModel):
         verbose_name_plural = _("Handouts")
 
     def __str__(self):
-        return self.name    
-    
+        return self.name
+
     def save(self, *args, **kwargs):
         self.file_size = self.file.size
         if not self.file_name:
             file_name = os.path.basename(self.file.name)
-            file_name = file_name[:file_name.rfind('.')]
+            file_name = file_name[: file_name.rfind(".")]
             self.file_name = file_name
-        super().save(*args, **kwargs)    
-    
-
+        super().save(*args, **kwargs)
