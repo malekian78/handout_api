@@ -17,13 +17,8 @@ src = ["backend"]
 # Enable or disable fixable linting issues automatically
 fix = true
 
-# Ignore specific errors
-# ignore = ["D105"]
-
 [tool.ruff.lint.isort]
 combine-as-imports = true
-
-
 
 [tool.pytest.ini_options]
 minversion = "6.0"
