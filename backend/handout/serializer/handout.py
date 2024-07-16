@@ -1,6 +1,7 @@
 from drf_spectacular.utils import OpenApiExample, extend_schema_serializer
 from rest_framework import serializers
 
+from feedback.models import Like
 from handout.models import Handout, Tag
 from handout.serializer import CategoryDetailSerializer
 
@@ -42,6 +43,7 @@ class TagSerializer(serializers.ModelSerializer):
                 "file": "http://127.0.0.1:8000/media/handouts/ali/agahi2.pdf",
                 "category": [{"id": 1, "name": "دیجیتالی", "slug": "digital"}],
                 "tag": [{"id": 1, "name": "tag1", "slug": "tag1"}, {"id": 2, "name": "tag2", "slug": "tag2"}],
+                "like_count": 2,
             },
         ),
     ]
@@ -50,6 +52,7 @@ class HandoutSerializer(serializers.ModelSerializer):
     category = CategoryDetailSerializer(many=True)
     tag = TagSerializer(many=True)
     author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
+    like_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Handout
@@ -67,7 +70,11 @@ class HandoutSerializer(serializers.ModelSerializer):
             "file",
             "category",
             "tag",
+            "like_count",
         ]
+
+    def get_like_count(self, obj):
+        return Like.objects.filter(handout=obj).count()
 
     def to_representation(self, instance):
         request = self.context.get("request")
@@ -79,5 +86,6 @@ class HandoutSerializer(serializers.ModelSerializer):
             rep.pop("file_size", None)
             rep.pop("file_name", None)
             rep.pop("file", None)
+            rep.pop("like_count", None)
 
         return rep
