@@ -32,3 +32,16 @@ class HandoutSerializer(serializers.ModelSerializer):
             "category",
             "tag",
         ]
+
+    def to_representation(self, instance):
+        request = self.context.get("request")
+        rep = super().to_representation(instance)
+        # if handout-list
+        if not request.parser_context.get("kwargs").get("pk"):
+            rep.pop("description", None)
+            rep.pop("page_count", None)
+            rep.pop("file_size", None)
+            rep.pop("file_name", None)
+            rep.pop("file", None)
+
+        return rep
