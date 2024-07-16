@@ -21,6 +21,7 @@ class HandoutSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "description",
+            "slug",
             "page_count",
             "visit_count",
             "publish_time",

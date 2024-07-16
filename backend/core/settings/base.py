@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django_jalali",
     # restFramework
     "rest_framework",
+    "django_filters",
     # My Apps
     "users",
     "handout",
