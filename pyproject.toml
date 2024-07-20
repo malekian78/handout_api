@@ -7,7 +7,7 @@
 select = ["E", "F", "W", "C90", "I"]
 
 # Exclude specific files or directories (e.g., migrations, static files)
-exclude = ["migrations", "static", "venv", "env", "settings", "__init__.py"]
+exclude = ["migrations", "static", "venv", "env",]
 
 # Set the maximum line length (if not ignoring E501)
 line-length = 120
