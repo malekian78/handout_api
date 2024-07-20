@@ -1,2 +1,2 @@
 from .category import CategorySerializer, CategoryDetailSerializer
-from .handout import HandoutSerializer
+from .handout import HandoutListSerializer, HandoutDetailSerializer

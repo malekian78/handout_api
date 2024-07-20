@@ -46,7 +46,26 @@ class TagSerializer(serializers.ModelSerializer):
         ),
     ]
 )
-class HandoutSerializer(serializers.ModelSerializer):
+class HandoutListSerializer(serializers.ModelSerializer):
+    category = CategoryDetailSerializer(many=True)
+    tag = TagSerializer(many=True)
+    author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
+
+    class Meta:
+        model = Handout
+        fields = [
+            "id",
+            "name",
+            "slug",
+            "visit_count",
+            "publish_time",
+            "author",
+            "category",
+            "tag",
+        ]
+
+
+class HandoutDetailSerializer(serializers.ModelSerializer):
     category = CategoryDetailSerializer(many=True)
     tag = TagSerializer(many=True)
     author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
@@ -68,16 +87,3 @@ class HandoutSerializer(serializers.ModelSerializer):
             "category",
             "tag",
         ]
-
-    def to_representation(self, instance):
-        request = self.context.get("request")
-        rep = super().to_representation(instance)
-        # if handout-list
-        if not request.parser_context.get("kwargs").get("pk"):
-            rep.pop("description", None)
-            rep.pop("page_count", None)
-            rep.pop("file_size", None)
-            rep.pop("file_name", None)
-            rep.pop("file", None)
-
-        return rep
