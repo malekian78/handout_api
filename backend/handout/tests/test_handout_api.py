@@ -89,17 +89,11 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
 
 @pytest.mark.django_db
 def test_handout_file_exists(client, handout, teardown_handouts):
-    # Define the URL for the API endpoint that serves the handout data
     url = reverse("handout:handout-detail", kwargs={"pk": handout.pk})
-
-    # Make a GET request to the API endpoint
     response = client.get(url)
 
-    # Ensure the request was successful
     assert response.status_code == status.HTTP_200_OK
-
-    # Verify the file details in the response
     response_data = response.json()
-    # assert 'file' in response_data  # Check if the file field exists in the response
+    # Check if the file field exists in the response
     file_url = response_data["file"]
-    assert file_url.endswith("file.pdf")  # Check if the file name matches
+    assert file_url.endswith("file.pdf")
