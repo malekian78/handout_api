@@ -1,7 +1,7 @@
 from drf_spectacular.utils import OpenApiExample, extend_schema_serializer
 from rest_framework import serializers
 
-from handout.models import Handout, Tag
+from handout.models import Author, Handout, Tag
 from handout.serializer import CategoryDetailSerializer
 
 
@@ -9,6 +9,12 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ["id", "name", "slug"]
+
+
+class AuthorSrializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ["id", "name"]
 
 
 @extend_schema_serializer(
@@ -49,7 +55,7 @@ class TagSerializer(serializers.ModelSerializer):
 class HandoutListSerializer(serializers.ModelSerializer):
     category = CategoryDetailSerializer(many=True)
     tag = TagSerializer(many=True)
-    author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
+    author = AuthorSrializer()
 
     class Meta:
         model = Handout
@@ -68,7 +74,7 @@ class HandoutListSerializer(serializers.ModelSerializer):
 class HandoutDetailSerializer(serializers.ModelSerializer):
     category = CategoryDetailSerializer(many=True)
     tag = TagSerializer(many=True)
-    author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
+    author = AuthorSrializer()
 
     class Meta:
         model = Handout
