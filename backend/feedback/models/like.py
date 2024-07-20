@@ -7,7 +7,7 @@ from utils.base_model import BaseModel
 
 
 class Like(BaseModel):
-    client_ip = models.GenericIPAddressField(verbose_name=_("client_ip"), max_length=150)
+    client_ip = models.GenericIPAddressField(verbose_name=_("client_ip"))
     user = models.ForeignKey(
         User,
         related_name="likes",
