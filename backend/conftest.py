@@ -32,6 +32,7 @@ def handout(author, category):
         author=author,
         file=SimpleUploadedFile("file.pdf", b"file_content", content_type="application/pdf"),
     )
+
     handout.category.add(category)
     handout.tag.add(tag)
     handout.save()
