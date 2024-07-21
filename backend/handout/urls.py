@@ -7,7 +7,7 @@ app_name = "handout"
 
 router = DefaultRouter()
 router.register("categories", CategoryViewSet, basename="category")
-router.register("handouts", HandoutViewSet, basename="handout")
+router.register("list", HandoutViewSet, basename="handout")
 
 urlpatterns = [
     path("", include(router.urls)),
