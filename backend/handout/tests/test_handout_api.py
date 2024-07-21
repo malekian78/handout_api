@@ -31,9 +31,15 @@ def test_get_handout_list_fields_and_value_exist(client, handout, author, teardo
         "id": handout.pk,
         "name": "Handout",
         "slug": "theHandout",
+        "visit_count": handout.visit_count,
         "publish_time": str(jdatetime.date.today()),
-        "author": author.name,
+        "author": {"id": author.id, "name": author.name},
+        "category": [
+            {"id": category.id, "name": category.name, "slug": category.slug} for category in handout.category.all()
+        ],
+        "tag": [{"id": tag.id, "name": tag.name, "slug": tag.slug} for tag in handout.tag.all()],
     }
+    print("author:", handout.author)
 
     # Only check the expected handout item
     if item["id"] == handout.pk:
@@ -69,6 +75,9 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
         set(actual_data.keys()) == expected_fields
     ), f"Expected fields: {expected_fields}, but got: {set(actual_data.keys())}"
 
+    # Construct the absolute URL for the file
+    file_url = f"http://testserver{handout.file.url}"
+
     # Check the values if necessary
     expected_data = {
         "id": handout.pk,
@@ -77,7 +86,14 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
         "description": "description of handout",
         "page_count": 10,
         "publish_time": str(jdatetime.date.today()),
-        "author": author.name,
+        "author": {"id": author.id, "name": author.name},
+        "category": [
+            {"id": category.id, "name": category.name, "slug": category.slug} for category in handout.category.all()
+        ],
+        "tag": [{"id": tag.id, "name": tag.name, "slug": tag.slug} for tag in handout.tag.all()],
+        "file_size": handout.file_size,
+        "file_name": handout.file_name,
+        "file": file_url,
     }
 
     # Check that the values of the expected fields match
@@ -89,17 +105,11 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
 
 @pytest.mark.django_db
 def test_handout_file_exists(client, handout, teardown_handouts):
-    # Define the URL for the API endpoint that serves the handout data
     url = reverse("handout:handout-detail", kwargs={"pk": handout.pk})
-
-    # Make a GET request to the API endpoint
     response = client.get(url)
 
-    # Ensure the request was successful
     assert response.status_code == status.HTTP_200_OK
-
-    # Verify the file details in the response
     response_data = response.json()
-    # assert 'file' in response_data  # Check if the file field exists in the response
+    # Check if the file field exists in the response
     file_url = response_data["file"]
-    assert file_url.endswith("file.pdf")  # Check if the file name matches
+    assert file_url.endswith("file.pdf")

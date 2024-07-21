@@ -2,7 +2,7 @@ from drf_spectacular.utils import OpenApiExample, extend_schema_serializer
 from rest_framework import serializers
 
 from feedback.models import Like
-from handout.models import Handout, Tag
+from handout.models import Author, Handout, Tag
 from handout.serializer import CategoryDetailSerializer
 
 
@@ -10,6 +10,12 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ["id", "name", "slug"]
+
+
+class AuthorSrializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ["id", "name"]
 
 
 @extend_schema_serializer(
@@ -26,7 +32,30 @@ class TagSerializer(serializers.ModelSerializer):
                 "category": [{"id": 1, "name": "دیجیتالی", "slug": "digital"}],
                 "tag": [{"id": 1, "name": "tag1", "slug": "tag1"}, {"id": 2, "name": "tag2", "slug": "tag2"}],
             },
-        ),
+        )
+    ]
+)
+class HandoutListSerializer(serializers.ModelSerializer):
+    category = CategoryDetailSerializer(many=True)
+    tag = TagSerializer(many=True)
+    author = AuthorSrializer()
+
+    class Meta:
+        model = Handout
+        fields = [
+            "id",
+            "name",
+            "slug",
+            "visit_count",
+            "publish_time",
+            "author",
+            "category",
+            "tag",
+        ]
+
+
+@extend_schema_serializer(
+    examples=[
         OpenApiExample(
             "Handout Detail Example",
             value={
@@ -48,10 +77,10 @@ class TagSerializer(serializers.ModelSerializer):
         ),
     ]
 )
-class HandoutSerializer(serializers.ModelSerializer):
+class HandoutDetailSerializer(serializers.ModelSerializer):
     category = CategoryDetailSerializer(many=True)
     tag = TagSerializer(many=True)
-    author = serializers.SlugRelatedField(many=False, read_only=True, slug_field="name")
+    author = AuthorSrializer()
     like_count = serializers.SerializerMethodField()
 
     class Meta:
@@ -75,17 +104,3 @@ class HandoutSerializer(serializers.ModelSerializer):
 
     def get_like_count(self, obj):
         return Like.objects.filter(handout=obj).count()
-
-    def to_representation(self, instance):
-        request = self.context.get("request")
-        rep = super().to_representation(instance)
-        # if handout-list
-        if not request.parser_context.get("kwargs").get("pk"):
-            rep.pop("description", None)
-            rep.pop("page_count", None)
-            rep.pop("file_size", None)
-            rep.pop("file_name", None)
-            rep.pop("file", None)
-            rep.pop("like_count", None)
-
-        return rep
