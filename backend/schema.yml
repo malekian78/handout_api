@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Handout API
+  version: 1.0.0
+  description: sharing handout for students
+paths:
+  /api/handout/categories/:
+    get:
+      operationId: listCategories
+      description: Returns a list of all categories in the system.
+      summary: Retrieve a list of categories
+      tags:
+      - Category
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+              examples:
+                CategoryListExample:
+                  value:
+                  - - id: 1
+                      name: Electronics
+                      slug: electronics
+                      parent: null
+                      children: []
+                    - id: 2
+                      name: Books
+                      slug: books
+                      parent: null
+                      children: []
+                  summary: Category List Example
+          description: ''
+  /api/handout/categories/{id}/:
+    get:
+      operationId: DetailCategory
+      description: Returns the details of a specific category base on id.
+      summary: Detail of a category
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Category.
+        required: true
+      tags:
+      - Category
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+              examples:
+                CategoryDetailExample:
+                  value:
+                    id: 1
+                    name: Electronics
+                    slug: electronics
+                    parent: null
+                    children: []
+                  summary: Category Detail Example
+          description: ''
+        '404':
+          description: Category not found
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Category name
+          maxLength: 150
+        slug:
+          type: string
+          title: Access link
+          description: by this link users will access to this category page.
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/CategoryDetail'
+          readOnly: true
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryDetail'
+          readOnly: true
+      required:
+      - children
+      - id
+      - name
+      - parent
+      - slug
+    CategoryDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Category name
+          maxLength: 150
+        slug:
+          type: string
+          title: Access link
+          description: by this link users will access to this category page.
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - id
+      - name
+      - slug
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid

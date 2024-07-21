@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from decouple import Csv, config
+from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,9 +8,11 @@ SECRET_KEY = config("SECRET_KEY", default="test")
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 
+
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="0.0.0.0", cast=Csv())
 
 settings_module = config("DJANGO_SETTINGS_MODULE", default="core.settings.test")
+
 
 
 INSTALLED_APPS = [
@@ -20,10 +22,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     # Modules
-    "django_jalali",
+    'django_jalali',
+    
     # restFramework
-    "rest_framework",
+    'rest_framework',
+    'drf_spectacular', # API Document
+    
     # My Apps
     "users",
     "handout",
@@ -108,3 +114,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #! Using Custom User
 AUTH_USER_MODEL = "users.User"
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Handout API',
+    'DESCRIPTION': 'sharing handout for students',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
