@@ -119,6 +119,10 @@ AUTH_USER_MODEL = "users.User"
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        # ...
+    ),
 }
 
 SPECTACULAR_SETTINGS = {
@@ -127,11 +131,4 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-        # ...
-    ),
 }
