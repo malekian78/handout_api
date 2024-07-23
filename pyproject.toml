@@ -20,6 +20,11 @@ fix = true
 [tool.ruff.lint.isort]
 combine-as-imports = true
 
+[tool.ruff.lint.extend-per-file-ignores]
+# Also ignore `E402` in all `__init__.py` files.
+"__init__.py" = ["E402", "F401"]
+"test.py" = ["F403", "F405"]
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 django_settings_module = "core.settings.test"
