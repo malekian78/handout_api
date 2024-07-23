@@ -1,13 +1,12 @@
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 
-from feedback.views import LikeViewSet
+from feedback.views import LikeCreateDestroyView
 
 app_name = "feedback"
 
-router = DefaultRouter()
-router.register(r"(?P<handout_id>\d+)/likes", LikeViewSet, basename="handout-likes")
+# router = DefaultRouter()
+# router.register(r"(?P<handout_id>\d+)/likes", LikeViewSet, basename="handout-likes")
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("like/<int:handout_id>/", LikeCreateDestroyView.as_view(), name="like-create-destroy"),
 ]

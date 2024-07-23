@@ -1,1 +1,1 @@
-from .like import LikeViewSet
+from .like import LikeCreateDestroyView
