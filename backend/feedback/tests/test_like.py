@@ -5,12 +5,7 @@ from feedback.models import Like
 
 
 @pytest.mark.django_db
-def test_user_can_like_handout(handout, user, teardown_handouts):
-    Like.objects.create(
-        client_ip="127.22.22.110",
-        user=user,
-        handout=handout,
-    )
+def test_user_can_like_handout(handout, user, like, teardown_handouts):
     assert Like.objects.filter(user=user, handout=handout).exists()
 
 

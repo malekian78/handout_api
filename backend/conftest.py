@@ -5,9 +5,19 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
 
+from feedback.models import Like
 from handout.models import Author, Category, Handout, Tag
 
 User = get_user_model()
+
+
+@pytest.fixture
+def like():
+    return Like.objects.create(
+        client_ip="127.22.22.110",
+        user=user,
+        handout=handout,
+    )
 
 
 @pytest.fixture
