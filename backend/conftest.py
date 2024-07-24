@@ -4,20 +4,12 @@ import pytest
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
+from rest_framework.test import APIClient
 
 from feedback.models import Like
 from handout.models import Author, Category, Handout, Tag
 
 User = get_user_model()
-
-
-@pytest.fixture
-def like():
-    return Like.objects.create(
-        client_ip="127.22.22.110",
-        user=user,
-        handout=handout,
-    )
 
 
 @pytest.fixture
@@ -47,6 +39,22 @@ def handout(author, category):
     handout.tag.add(tag)
     handout.save()
     return handout
+
+
+@pytest.fixture
+def like(user, handout):
+    return Like.objects.create(
+        client_ip="127.22.22.110",
+        user=user,
+        handout=handout,
+    )
+
+
+@pytest.fixture
+def auth_client(user):
+    client = APIClient()
+    client.force_authenticate(user=user)
+    return client
 
 
 @pytest.fixture
