@@ -68,6 +68,7 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
         "file",
         "category",
         "tag",
+        "like_count",
     }
 
     # Check that all expected fields are present in the response
@@ -94,6 +95,7 @@ def test_get_handout_detail_fields_and_value_exist(client, handout, author, tear
         "file_size": handout.file_size,
         "file_name": handout.file_name,
         "file": file_url,
+        "like_count": 0,
     }
 
     # Check that the values of the expected fields match
