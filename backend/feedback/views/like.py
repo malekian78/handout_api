@@ -7,9 +7,7 @@ from feedback.models import Like
 from feedback.serializer import LikeSerializer
 
 
-class LikeCreateDestroyView(
-    mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView
-):
+class LikeCreateDestroyView(mixins.CreateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     permission_classes = [IsAuthenticated]
