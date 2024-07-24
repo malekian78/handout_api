@@ -22,7 +22,7 @@ def test_user_cannot_duplicate_like(handout, user, like, auth_client, teardown_h
 
 @pytest.mark.django_db
 def test_user_can_delete_like(auth_client, user, handout, like, teardown_handouts):
-    url = reverse("feedback:like-create-destroy", args=[handout.id])
+    url = reverse("feedback:like-create-destroy", args=[handout.id], HTTP_X_FORWARDED_FOR="127.22.22.110")
     response = auth_client.delete(url)
     assert response.status_code == 204
     assert not Like.objects.filter(user=user, handout=handout).exists()
