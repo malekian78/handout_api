@@ -26,7 +26,15 @@ class LikeCreateDestroyView(mixins.CreateModelMixin, mixins.DestroyModelMixin, g
 
     def delete(self, request, *args, **kwargs):
         user = request.user if request.user.is_authenticated else None
-        client_ip = request.META.get("REMOTE_ADDR")
+        client_ip = self.get_client_ip(request)
         Like_handout = get_object_or_404(Like, handout=self.kwargs["handout_id"], user=user, client_ip=client_ip)
         Like_handout.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def get_client_ip(request):
+        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+        return ip

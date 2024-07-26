@@ -12,7 +12,7 @@ class LikeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request = self.context.get("request", None)
         user = request.user if request and request.user.is_authenticated else None
-        client_ip = request.META.get("REMOTE_ADDR") if request else None
+        client_ip = self.get_client_ip(request)
         handout = validated_data.get("handout")
 
         like_instance, created = Like.objects.get_or_create(
@@ -28,3 +28,11 @@ class LikeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"detail": "You have already liked this handout."})
 
         return like_instance
+
+    def get_client_ip(request):
+        x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+        return ip
