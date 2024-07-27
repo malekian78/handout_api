@@ -8,3 +8,5 @@ RUN pip install -r requirements/production.txt
 RUN mkdir /app
 WORKDIR /app
 ADD ./ /app/
+
+RUN python manage.py collectstatic --no-input
