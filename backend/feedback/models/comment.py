@@ -26,7 +26,6 @@ class Comment(BaseModel):
     class Meta:
         verbose_name = _("Comment")
         verbose_name_plural = _("Comments")
-        constraints = [models.UniqueConstraint(fields=["email", "handout"], name="unique_email_handout_comment")]
 
     def __str__(self):
         return f"{self.name}_{self.handout}"

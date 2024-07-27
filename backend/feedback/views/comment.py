@@ -16,13 +16,6 @@ class CommentViewSet(viewsets.ModelViewSet):
         handout = get_object_or_404(Handout, id=handout_id)
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            email = serializer.validated_data["email"]
-            if Comment.objects.filter(email=email, handout=handout).exists():
-                return Response(
-                    {"detail": "A comment with this email for the specified handout already exists."},
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
-
             serializer.save(handout=handout, status=Comment.Status.DRAFT)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
@@ -46,16 +39,6 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         user = request.user
-        if not user.is_authenticated:
-            return Response({"detail": "Authentication required."}, status=status.HTTP_401_UNAUTHORIZED)
-
-        comment_id = self.kwargs.get("pk")
-        comment = get_object_or_404(Comment, id=comment_id)
-
-        if comment.email != user.email:
-            return Response(
-                {"detail": "You do not have permission to edit this comment."}, status=status.HTTP_403_FORBIDDEN
-            )
-
-        request.data["email"] = user.email
+        if user.is_authenticated:
+            request.data["email"] = user.email
         return super().update(request, *args, **kwargs)
