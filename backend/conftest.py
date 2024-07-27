@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
 from rest_framework.test import APIClient
 
-from feedback.models import Like
+from feedback.models import Comment, Like
 from handout.models import Author, Category, Handout, Tag
 
 User = get_user_model()
@@ -39,6 +39,17 @@ def handout(author, category):
     handout.tag.add(tag)
     handout.save()
     return handout
+
+
+@pytest.fixture
+def comment(handout):
+    return Comment.objects.create(
+        handout=handout,
+        name="Test Comment",
+        email="testuserr@example.com",
+        body="This is a test comment",
+        status=Comment.Status.PUBLISHED,
+    )
 
 
 @pytest.fixture
